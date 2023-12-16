@@ -1,6 +1,20 @@
 #include <stdio.h>
 #include <string.h>
 
+char *convert_to_lower(char *name)
+{
+
+    for (int i = 0; name[i] != '\0'; i++)
+
+    {
+
+        if (name[i] >= 65 && name[i] <= 90)
+            name[i] = name[i] + 32;
+    }
+
+    return name;
+}
+
 int main()
 {
     // Looping over strings:
@@ -32,7 +46,7 @@ int main()
 
     // printf("Sum of my_numbers: %d\n", sum);
 
-    char fname[30];
+    char fname[30] = "AdehenryYY";
     char lname[10];
 
     // printf("Enter your first name (maximum of 9 characters): ");
@@ -65,6 +79,14 @@ int main()
     // {
     //     printf("%c\n", my_name[i]);
     // }
+
+    // Converting chatacters to lowercase: If the ASCII value of a chatacter is between 65 - 90, Add 32
+
+    // printf("%c\n", 122);
+
+    char *result = convert_to_lower(fname);
+
+    printf("%s\n", result);
 
     return 0;
 }
