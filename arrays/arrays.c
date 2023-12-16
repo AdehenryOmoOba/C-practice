@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
+// Pointers are derived data types.
+// Pointers are a special type of variables and they always point to the base memory address of other variables
+
 char *convert_to_lower(char *name)
 {
 
