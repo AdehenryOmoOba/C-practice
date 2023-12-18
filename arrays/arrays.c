@@ -87,9 +87,9 @@ int main()
 
     // printf("%c\n", 122);
 
-    char *result = convert_to_lower(fname);
+    // char *result = convert_to_lower(fname);
 
-    printf("%s\n", result);
+    // printf("%s\n", result);
 
     return 0;
 }
