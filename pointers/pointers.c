@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+static char *joinName(char *, char *);
+
 int main()
 {
     // int age = 27;
@@ -49,5 +51,29 @@ int main()
     // int *myPointer = NULL;
     // int *myPointer = 0;
 
-    // Dangling pointers:
+    // Dangling pointers: They are pointers pointing to a memory location that is freed
+
+    char foo[] = "foo";
+    char bar[] = "bar";
+
+    char *fullName = joinName(foo, bar);
+
+    printf("Full name before mutation: %s\n", fullName);
+    printf("Address inside pointer:    %p\n", fullName);
+
+    fullName[0] = 'Z';
+
+    printf("Full name after mutation: %s\n", fullName);
+}
+
+static char *joinName(char *fName, char *lName)
+{
+    printf("first name: %s\n", fName);
+    printf("last name: %s\n", lName);
+
+    static char allNames[] = "Ade Henry";
+
+    printf("Address of string inside pointer: %p\n", allNames);
+
+    return allNames;
 }
