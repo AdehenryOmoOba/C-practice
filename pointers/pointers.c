@@ -1,6 +1,8 @@
 #include <stdio.h>
+#include <string.h>
 
-static char *joinName(char *, char *);
+// static char *joinName(char *, char *);
+void display(void);
 
 int main()
 {
@@ -53,27 +55,42 @@ int main()
 
     // Dangling pointers: They are pointers pointing to a memory location that is freed
 
-    char foo[] = "foo";
-    char bar[] = "bar";
+    // char foo[] = "foo";
+    // char bar[] = "bar";
 
-    char *fullName = joinName(foo, bar);
+    // char *fullName = joinName(foo, bar);
 
-    printf("Full name before mutation: %s\n", fullName);
-    printf("Address inside pointer:    %p\n", fullName);
+    // printf("Full name: %s\n", fullName);
 
-    fullName[0] = 'Z';
-
-    printf("Full name after mutation: %s\n", fullName);
+    // Function pointers
+    void (*displayPtr)(void) = &display;
+    (*displayPtr)();
 }
 
-static char *joinName(char *fName, char *lName)
+// static char *joinName(char *fName, char *lName)
+// {
+//     static char allNames[30];
+//     int counter = 0;
+
+//     for (int i = 0; fName[i] != '\0'; i++)
+//     {
+//         allNames[counter] = fName[i];
+//         counter++;
+//     }
+
+//     allNames[counter] = ' ';
+//     counter++;
+
+//     for (int i = 0; lName[i] != '\0'; i++)
+//     {
+//         allNames[counter] = lName[i];
+//         counter++;
+//     }
+
+//     return allNames;
+// }
+
+void display()
 {
-    printf("first name: %s\n", fName);
-    printf("last name: %s\n", lName);
-
-    static char allNames[] = "Ade Henry";
-
-    printf("Address of string inside pointer: %p\n", allNames);
-
-    return allNames;
+    printf("Hello world...\n");
 }
