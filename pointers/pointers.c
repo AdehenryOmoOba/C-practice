@@ -2,7 +2,27 @@
 #include <string.h>
 
 // static char *joinName(char *, char *);
-void display(void);
+// void display(void);
+
+int sum(int a, int b)
+{
+    return a + b;
+}
+
+int subtract(int a, int b)
+{
+    return a - b;
+}
+
+int multiply(int a, int b)
+{
+    return a * b;
+}
+
+// float divide(int a, int b)
+// {
+//     return a / b;
+// }
 
 int main()
 {
@@ -63,8 +83,36 @@ int main()
     // printf("Full name: %s\n", fullName);
 
     // Function pointers
-    void (*displayPtr)(void) = &display;
-    (*displayPtr)();
+    // void (*displayPtr)(void) = &display;
+    // (*displayPtr)();
+
+    int (*mathFuncPtrArray[3])(int, int) = {sum, subtract, multiply};
+
+    int option;
+
+    printf("Enter a number between 1 and 3: ");
+
+    scanf("%d", &option);
+
+    if (option && (option >= 1 && option <= 3))
+    {
+        int a, b;
+        printf("✅ Great! You selection option: %d\n", option);
+
+        printf("Enter first number: ");
+        scanf("%d", &a);
+
+        printf("Enter second number: ");
+        scanf("%d", &b);
+
+        int result = (*mathFuncPtrArray[option - 1])(a, b);
+
+        printf("Result: %d\n", result);
+    }
+    else
+    {
+        printf("🚫 Ooops! invalid selection : %d\n", option);
+    }
 }
 
 // static char *joinName(char *fName, char *lName)
@@ -90,7 +138,7 @@ int main()
 //     return allNames;
 // }
 
-void display()
-{
-    printf("Hello world...\n");
-}
+// void display()
+// {
+//     printf("Hello world...\n");
+// }
