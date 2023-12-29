@@ -3,32 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 
-void readFile(char *filePath)
-{
-    FILE *filePtr = fopen(filePath, "r");
-
-    // char xter;
-    char text[100];
-
-    if (!filePtr)
-    {
-        printf("File path is invalid\n");
-        exit(1);
-    }
-
-    while (!feof(filePtr))
-    {
-        // xter = fgetc(filePtr);
-        // printf("%c", xter);
-
-        fgets(text, 10, filePtr);
-        printf("%s", text);
-    }
-    printf("\n");
-
-    fclose(filePtr);
-}
-
 void appendToFile()
 {
     int addText = 1;
@@ -53,11 +27,12 @@ void appendToFile()
 
     if (access(filePath, F_OK) != 0)
     {
-        printf("File path is invalid, try again\n");
-        exit(1);
+        printf("File path is invalid, a new file named '%s' has been created in current directory\n", filePath);
     }
-
-    printf("✅ File path '%s' is found\n", filePath);
+    else
+    {
+        printf("✅ File path '%s' is found\n", filePath);
+    }
 
     filePtr = fopen(filePath, "a");
 
@@ -83,8 +58,81 @@ void appendToFile()
     fclose(filePtr);
 }
 
+void readFile()
+{
+    char filePath[200];
+
+    printf("Enter file path: ");
+
+    fgets(filePath, sizeof(filePath), stdin);
+
+    // Remove the '\n' by replacing it with '\0'
+    int strLengtth = strlen(filePath);
+    if (strLengtth > 0 && filePath[strLengtth - 1] == '\n')
+    {
+        filePath[strLengtth - 1] = '\0';
+    }
+
+    FILE *filePtr = fopen(filePath, "r");
+
+    char xter;
+
+    if (!filePtr)
+    {
+        printf("File path is invalid\n");
+        exit(1);
+    }
+
+    while ((xter = fgetc(filePtr)) != EOF)
+    {
+        printf("%c", xter);
+    }
+
+    fclose(filePtr);
+}
+
+void countFileLines()
+{
+
+    char filePath[200];
+
+    printf("Enter file path: ");
+
+    fgets(filePath, sizeof(filePath), stdin);
+
+    // Remove the '\n' by replacing it with '\0'
+    int strLengtth = strlen(filePath);
+    if (strLengtth > 0 && filePath[strLengtth - 1] == '\n')
+    {
+        filePath[strLengtth - 1] = '\0';
+    }
+
+    FILE *filePtr = fopen(filePath, "r");
+
+    if (filePtr == NULL)
+    {
+        printf("🚫 File not found\n");
+        exit(1);
+    }
+
+    char xter;
+    int lines = 1;
+
+    while ((xter = fgetc(filePtr)) != EOF)
+    {
+
+        if (xter == '\n')
+        {
+            lines++;
+        }
+    }
+    printf("%d\n", lines);
+    fclose(filePtr);
+}
+
 int main()
 {
-    readFile("try.txt");
     // appendToFile();
+    // readFile();
+    // countFileLines();
 }
