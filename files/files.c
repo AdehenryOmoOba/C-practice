@@ -130,9 +130,52 @@ void countFileLines()
     fclose(filePtr);
 }
 
+void copyFile()
+{
+
+    char sourceFilePath[200];
+    char destinationFilePath[200];
+
+    printf("Enter source file path: ");
+
+    fgets(sourceFilePath, sizeof(sourceFilePath), stdin);
+
+    // Remove the '\n' by replacing it with '\0'
+    int strLengtth = strlen(sourceFilePath);
+    if (strLengtth > 0 && sourceFilePath[strLengtth - 1] == '\n')
+    {
+        sourceFilePath[strLengtth - 1] = '\0';
+    }
+
+    FILE *sourceFilePtr = fopen(sourceFilePath, "r");
+
+    char xter;
+
+    if (!sourceFilePtr)
+    {
+        printf("File path is invalid\n");
+        exit(1);
+    }
+
+    printf("Enter destination file path: ");
+
+    fgets(destinationFilePath, sizeof(destinationFilePath), stdin);
+
+    FILE *destinationFilePtr = fopen(destinationFilePath, "w");
+
+    while ((xter = fgetc(sourceFilePtr)) != EOF)
+    {
+        fputc(xter, destinationFilePtr);
+    }
+
+    fclose(sourceFilePtr);
+    fclose(destinationFilePtr);
+}
+
 int main()
 {
     // appendToFile();
     // readFile();
     // countFileLines();
+    // copyFile();
 }
