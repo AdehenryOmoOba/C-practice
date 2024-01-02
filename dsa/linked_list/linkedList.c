@@ -8,7 +8,37 @@ struct node
     struct node *next;
 };
 
-struct node *insertNode(struct node *headPtr, int data)
+struct node *prependNode(struct node *headPtr, int data)
+{
+    if (!headPtr)
+    {
+        struct node *head = (struct node *)malloc(sizeof(struct node));
+
+        if (!head)
+        {
+            printf("Heap memory allocation failed");
+            exit(1);
+        }
+
+        head->data = data;
+        head->next = NULL;
+
+        headPtr = head;
+    }
+    else
+    {
+        struct node *newNodePtr = (struct node *)malloc(sizeof(struct node));
+        struct node *temp = headPtr->next;
+
+        headPtr->next = newNodePtr;
+        newNodePtr->data = data;
+        newNodePtr->next = temp;
+    }
+
+    return headPtr;
+}
+
+struct node *appendNode(struct node *headPtr, int data)
 {
     if (!headPtr)
     {
@@ -58,7 +88,7 @@ void traverseNode(struct node *headPtr)
 
     if (!current)
     {
-        printf("Linked list is empty.");
+        printf("Linked list is empty.\n");
         exit(1);
     }
 
@@ -86,10 +116,15 @@ void freeMemory(struct node *headPtr)
 int main()
 {
     struct node *headPtr = NULL;
-    headPtr = insertNode(headPtr, 0);
-    headPtr = insertNode(headPtr, 1);
-    headPtr = insertNode(headPtr, 2);
-    headPtr = insertNode(headPtr, 3);
+    // headPtr = appendNode(headPtr, 0);
+    // headPtr = appendNode(headPtr, 1);
+    // headPtr = appendNode(headPtr, 2);
+    // headPtr = appendNode(headPtr, 3);
+
+    headPtr = prependNode(headPtr, 0);
+    headPtr = prependNode(headPtr, 1);
+    headPtr = prependNode(headPtr, 2);
+    headPtr = prependNode(headPtr, 3);
 
     traverseNode(headPtr);
 
